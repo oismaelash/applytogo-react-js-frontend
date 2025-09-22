@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ExternalLink, Check, X } from "lucide-react";
+import { trackJobSiteClick } from "@/lib/analytics";
 
 interface JobSite {
   id: string;
@@ -61,6 +62,7 @@ export const JobSiteCard = ({ jobSite }: JobSiteCardProps) => {
           target="_blank" 
           rel="noopener noreferrer"
           className="w-full"
+          onClick={() => trackJobSiteClick(jobSite.name, jobSite.url)}
         >
           <Button 
             className="w-full bg-gradient-primary hover:opacity-90 text-primary-foreground font-medium flex items-center justify-center gap-2"

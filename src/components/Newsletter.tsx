@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Mail, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { trackNewsletterSignup } from "@/lib/analytics";
 
 export const Newsletter = () => {
   const [email, setEmail] = useState("");
@@ -12,6 +13,9 @@ export const Newsletter = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
+      // Track newsletter signup
+      trackNewsletterSignup(email);
+      
       toast({
         title: "Inscrição realizada!",
         description: "Você receberá novidades sobre novos sites de vagas.",

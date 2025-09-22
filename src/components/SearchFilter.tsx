@@ -1,6 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Search } from "lucide-react";
+import { trackSearch, trackFilterUsage } from "@/lib/analytics";
 
 interface SearchFilterProps {
   searchTerm: string;
@@ -17,6 +18,20 @@ export const SearchFilter = ({
   onCategoryChange, 
   categories 
 }: SearchFilterProps) => {
+  const handleSearchChange = (value: string) => {
+    onSearchChange(value);
+    if (value.trim()) {
+      trackSearch(value.trim());
+    }
+  };
+
+  const handleCategoryChange = (value: string) => {
+    onCategoryChange(value);
+    if (value !== "all") {
+      trackFilterUsage("category", value);
+    }
+  };
+
   return (
     <div className="w-full max-w-2xl mx-auto mb-12 space-y-4">
       <div className="relative">
@@ -25,12 +40,12 @@ export const SearchFilter = ({
           type="text"
           placeholder="Buscar sites de vagas..."
           value={searchTerm}
-          onChange={(e) => onSearchChange(e.target.value)}
+          onChange={(e) => handleSearchChange(e.target.value)}
           className="pl-10 py-3 text-base border-border/50 focus:border-primary bg-input"
         />
       </div>
       
-      <Select value={selectedCategory} onValueChange={onCategoryChange}>
+      <Select value={selectedCategory} onValueChange={handleCategoryChange}>
         <SelectTrigger className="w-full py-3 text-base border-border/50 focus:border-primary bg-input">
           <SelectValue placeholder="Filtrar por categoria" />
         </SelectTrigger>
