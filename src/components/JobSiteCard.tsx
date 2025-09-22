@@ -19,7 +19,11 @@ interface JobSiteCardProps {
 
 export const JobSiteCard = ({ jobSite }: JobSiteCardProps) => {
   return (
-    <Card className="group relative overflow-hidden transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1 border-border/50 bg-card">
+    <Card 
+      className="group relative overflow-hidden transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1 border-border/50 bg-card cursor-pointer"
+      data-section="job-site-card"
+      data-track={`click|card|${jobSite.name.replace(/\s+/g, '_')}`}
+    >
       <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-5 transition-opacity duration-300 pointer-events-none" />
       
       <CardHeader className="pb-3">
@@ -31,6 +35,7 @@ export const JobSiteCard = ({ jobSite }: JobSiteCardProps) => {
             <Badge 
               variant="secondary" 
               className="mt-2 text-xs font-medium bg-secondary/80 text-secondary-foreground"
+              data-track={`click|badge|${jobSite.category}`}
             >
               {jobSite.category}
             </Badge>
@@ -63,9 +68,11 @@ export const JobSiteCard = ({ jobSite }: JobSiteCardProps) => {
           rel="noopener noreferrer"
           className="w-full"
           onClick={() => trackJobSiteClick(jobSite.name, jobSite.url)}
+          data-track={`click|external_link|${jobSite.name.replace(/\s+/g, '_')}`}
         >
           <Button 
             className="w-full bg-gradient-primary hover:opacity-90 text-primary-foreground font-medium flex items-center justify-center gap-2"
+            data-track={`click|button|access_site_${jobSite.name.replace(/\s+/g, '_')}`}
           >
             Acessar site
             <ExternalLink className="h-4 w-4" />

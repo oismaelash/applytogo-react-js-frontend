@@ -53,3 +53,36 @@ export const trackNewsletterSignup = (email: string) => {
 export const trackFilterUsage = (filterType: string, filterValue: string) => {
   trackEvent('filter', filterType, filterValue);
 };
+
+// Tracking específico para elementos da interface
+export const trackButtonClick = (buttonText: string, buttonLocation?: string) => {
+  trackEvent('button_click', 'ui_interaction', `${buttonLocation || 'unknown'}_${buttonText}`, undefined);
+};
+
+export const trackCardClick = (cardTitle: string, cardType: string) => {
+  trackEvent('card_click', 'ui_interaction', `${cardType}_${cardTitle}`, undefined);
+};
+
+export const trackNavigationClick = (navItem: string, navLocation: string) => {
+  trackEvent('navigation_click', 'navigation', `${navLocation}_${navItem}`, undefined);
+};
+
+export const trackFormInteraction = (formElement: string, action: string) => {
+  trackEvent('form_interaction', 'form', `${formElement}_${action}`, undefined);
+};
+
+export const trackScrollInteraction = (scrollDirection: 'up' | 'down', scrollPosition: number) => {
+  trackEvent('scroll', 'user_behavior', scrollDirection, scrollPosition);
+};
+
+export const trackHoverInteraction = (elementType: string, elementText: string) => {
+  trackEvent('hover', 'user_behavior', `${elementType}_${elementText}`, undefined);
+};
+
+export const trackFocusInteraction = (elementType: string, elementText: string) => {
+  trackEvent('focus', 'user_behavior', `${elementType}_${elementText}`, undefined);
+};
+
+export const trackPageSectionView = (sectionName: string) => {
+  trackEvent('section_view', 'page_interaction', sectionName, undefined);
+};

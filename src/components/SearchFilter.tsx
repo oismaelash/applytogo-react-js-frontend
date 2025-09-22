@@ -33,7 +33,7 @@ export const SearchFilter = ({
   };
 
   return (
-    <div className="w-full max-w-2xl mx-auto mb-12 space-y-4">
+    <div className="w-full max-w-2xl mx-auto mb-12 space-y-4" data-section="search-filter-container">
       <div className="relative">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
         <Input
@@ -42,17 +42,25 @@ export const SearchFilter = ({
           value={searchTerm}
           onChange={(e) => handleSearchChange(e.target.value)}
           className="pl-10 py-3 text-base border-border/50 focus:border-primary bg-input"
+          data-track="focus|form|search_input"
         />
       </div>
       
       <Select value={selectedCategory} onValueChange={handleCategoryChange}>
-        <SelectTrigger className="w-full py-3 text-base border-border/50 focus:border-primary bg-input">
+        <SelectTrigger 
+          className="w-full py-3 text-base border-border/50 focus:border-primary bg-input"
+          data-track="click|select|category_filter"
+        >
           <SelectValue placeholder="Filtrar por categoria" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">Todas as categorias</SelectItem>
+          <SelectItem value="all" data-track="click|select_option|all_categories">Todas as categorias</SelectItem>
           {categories.map((category) => (
-            <SelectItem key={category} value={category}>
+            <SelectItem 
+              key={category} 
+              value={category}
+              data-track={`click|select_option|${category}`}
+            >
               {category.charAt(0).toUpperCase() + category.slice(1)}
             </SelectItem>
           ))}

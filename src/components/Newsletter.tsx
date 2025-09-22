@@ -25,7 +25,7 @@ export const Newsletter = () => {
   };
 
   return (
-    <Card className="bg-gradient-primary border-0 text-primary-foreground max-w-2xl mx-auto">
+    <Card className="bg-gradient-primary border-0 text-primary-foreground max-w-2xl mx-auto" data-section="newsletter-card">
       <CardContent className="p-8 text-center">
         <div className="flex justify-center mb-4">
           <div className="p-3 bg-white/20 rounded-full">
@@ -40,7 +40,7 @@ export const Newsletter = () => {
           Assine nossa newsletter e seja o primeiro a saber sobre novos sites e oportunidades.
         </p>
         
-        <form onSubmit={handleSubmit} className="flex gap-3 max-w-md mx-auto">
+        <form onSubmit={handleSubmit} className="flex gap-3 max-w-md mx-auto" data-section="newsletter-form">
           <Input
             type="email"
             placeholder="Seu melhor e-mail"
@@ -48,11 +48,13 @@ export const Newsletter = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
             className="flex-1 bg-white/10 border-white/20 text-primary-foreground placeholder:text-primary-foreground/60 focus:border-white/40"
+            data-track="focus|form|newsletter_email"
           />
           <Button 
             type="submit" 
             variant="secondary"
             className="bg-white text-primary hover:bg-white/90 font-medium px-6"
+            data-track="click|button|newsletter_submit"
           >
             Assinar
             <ArrowRight className="h-4 w-4 ml-2" />

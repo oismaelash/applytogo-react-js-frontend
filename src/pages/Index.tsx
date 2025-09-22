@@ -43,7 +43,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gradient-background">
       {/* Header */}
-      <header className="bg-background/80 backdrop-blur-sm border-b border-border/50">
+      <header className="bg-background/80 backdrop-blur-sm border-b border-border/50" data-section="header">
         <div className="container mx-auto px-4 py-6">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-2">
@@ -60,15 +60,17 @@ const Index = () => {
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-12">
+      <main className="container mx-auto px-4 py-12" data-section="main-content">
         {/* Search and Filter */}
-        <SearchFilter
-          searchTerm={searchTerm}
-          onSearchChange={setSearchTerm}
-          selectedCategory={selectedCategory}
-          onCategoryChange={setSelectedCategory}
-          categories={categories}
-        />
+        <div data-section="search-filter">
+          <SearchFilter
+            searchTerm={searchTerm}
+            onSearchChange={setSearchTerm}
+            selectedCategory={selectedCategory}
+            onCategoryChange={setSelectedCategory}
+            categories={categories}
+          />
+        </div>
 
         {/* Loading State */}
         {loading ? (
@@ -89,19 +91,20 @@ const Index = () => {
 
             {/* Job Sites Grid */}
             {filteredSites.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20" data-section="job-sites-grid">
                 {filteredSites.map((site, index) => (
                   <div 
                     key={site.id} 
                     className="animate-fade-in"
                     style={{ animationDelay: `${index * 100}ms` }}
+                    data-section="job-site-card"
                   >
                     <JobSiteCard jobSite={site} />
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="text-center py-20">
+              <div className="text-center py-20" data-section="no-results">
                 <p className="text-xl text-muted-foreground mb-4">
                   Nenhum site encontrado para sua busca.
                 </p>
@@ -114,11 +117,13 @@ const Index = () => {
         )}
 
         {/* Newsletter CTA */}
-        <Newsletter />
+        <div data-section="newsletter">
+          <Newsletter />
+        </div>
       </main>
 
       {/* Footer */}
-      <footer className="bg-card border-t border-border/50 py-8 mt-20">
+      <footer className="bg-card border-t border-border/50 py-8 mt-20" data-section="footer">
         <div className="container mx-auto px-4 text-center">
           <p className="text-muted-foreground">
             © 2024 Sites de Vagas. Encontre sua próxima oportunidade.
