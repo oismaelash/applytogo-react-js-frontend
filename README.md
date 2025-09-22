@@ -1,73 +1,145 @@
-# Welcome to your Lovable project
+# Apply To Go project
+## MeuGuru.tech
+## https://plataformas-vagas.meuguru.tech/
 
-## Project info
+## Como contribuir com novas plataformas
 
-**URL**: https://lovable.dev/projects/67624275-2bcc-4fce-b2c9-9199275c70c9
+Se você gostaria de adicionar uma nova plataforma de vagas ao site, siga este processo de contribuição:
 
-## How can I edit this code?
+### 1. Configuração inicial
 
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/67624275-2bcc-4fce-b2c9-9199275c70c9) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+Primeiro, certifique-se de ter o projeto configurado localmente:
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Clone o repositório
+git clone <URL_DO_REPOSITORIO>
+cd applytogo-react-js-frontend
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
+# Instale as dependências
 npm i
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Execute o projeto para testar
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+### 2. Criar uma nova branch
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Crie uma nova branch para sua contribuição:
 
-**Use GitHub Codespaces**
+```sh
+# Certifique-se de estar na branch main e atualizada
+git checkout main
+git pull origin main
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+# Crie uma nova branch com um nome descritivo
+git checkout -b feature/adicionar-plataforma-[nome-da-plataforma]
+```
 
-## What technologies are used for this project?
+### 3. Adicionar a nova plataforma
 
-This project is built with:
+Edite o arquivo `public/data.json` e adicione sua nova plataforma ao array `jobSites`. Use o próximo ID disponível e siga este formato:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```json
+{
+  "id": "56",
+  "name": "Nome da Plataforma",
+  "category": "categoria-adequada",
+  "description": "Descrição da plataforma",
+  "url": "https://www.exemplo.com/",
+  "requiresLogin": true
+}
+```
 
-## How can I deploy this project?
+#### Categorias disponíveis:
+- `"plataformas internacionais"` - Para plataformas globais (LinkedIn, Indeed, etc.)
+- `"plataformas brasileiras"` - Para plataformas específicas do Brasil
+- `"consultorias internacionais"` - Para consultorias globais (Accenture, Deloitte, etc.)
+- `"consultorias brasileiras"` - Para consultorias brasileiras
 
-Simply open [Lovable](https://lovable.dev/projects/67624275-2bcc-4fce-b2c9-9199275c70c9) and click on Share -> Publish.
+#### Campos obrigatórios:
+- `id`: Número sequencial único (string)
+- `name`: Nome da plataforma
+- `category`: Categoria da plataforma (uma das listadas acima)
+- `description`: Descrição breve da plataforma
+- `url`: URL principal da plataforma
+- `requiresLogin`: `true` se precisa de login, `false` caso contrário
 
-## Can I connect a custom domain to my Lovable project?
+### 4. Testar as mudanças
 
-Yes, you can!
+Após adicionar a plataforma, teste localmente:
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+```sh
+npm run dev
+```
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Verifique se:
+- A nova plataforma aparece na lista
+- Os links funcionam corretamente
+- A categoria está correta
+- Não há erros no console
+
+### 5. Fazer commit e push
+
+```sh
+# Adicione as mudanças
+git add public/data.json
+
+# Faça o commit com uma mensagem descritiva
+git commit -m "feat: adicionar [Nome da Plataforma] às plataformas de vagas"
+
+# Faça push da branch
+git push origin feature/adicionar-plataforma-[nome-da-plataforma]
+```
+
+### 6. Criar Pull Request
+
+1. Vá até o repositório no GitHub
+2. Clique em "Compare & pull request" (aparecerá automaticamente após o push)
+3. Preencha o título e descrição do PR:
+   - **Título**: `feat: adicionar [Nome da Plataforma]`
+   - **Descrição**: 
+     ```
+     ## Descrição
+     Adiciona [Nome da Plataforma] à lista de plataformas de vagas disponíveis.
+     
+     ## Categoria
+     [plataformas internacionais/plataformas brasileiras/consultorias internacionais/consultorias brasileiras]
+     
+     ## URL
+     https://www.exemplo.com/
+     
+     ## Requer Login
+     [Sim/Não]
+     ```
+4. Marque os revisores apropriados
+5. Crie o Pull Request
+
+### 7. Aguardar revisão
+
+- Sua contribuição será revisada pela equipe
+- Podem ser solicitadas alterações ou melhorias
+- Após a aprovação, o PR será mergeado na branch `main`
+
+### Exemplo de contribuição
+
+```json
+{
+  "id": "56",
+  "name": "AngelList",
+  "category": "plataformas internacionais",
+  "description": "Startup job board and funding platform",
+  "url": "https://angel.co/",
+  "requiresLogin": true
+}
+```
+
+### Dicas importantes
+
+- ✅ Verifique se a plataforma não já existe na lista
+- ✅ Use o próximo ID sequencial disponível
+- ✅ Mantenha a consistência no formato e estilo
+- ✅ Teste localmente antes de fazer o PR
+- ✅ Use mensagens de commit claras e descritivas
+- ❌ Não adicione plataformas duplicadas
+- ❌ Não altere IDs existentes
+- ❌ Não adicione campos extras além dos obrigatórios
