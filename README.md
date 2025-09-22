@@ -1,6 +1,7 @@
 # Apply To Go project
 ## MeuGuru.tech
 ## https://plataformas-vagas.meuguru.tech/
+#### Sua estrela ajuda o projeto a crescer — deixe a sua no repositório!
 
 ## Como contribuir com novas plataformas
 
