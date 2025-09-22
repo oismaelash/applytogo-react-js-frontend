@@ -19,7 +19,7 @@ interface JobSiteCardProps {
 export const JobSiteCard = ({ jobSite }: JobSiteCardProps) => {
   return (
     <Card className="group relative overflow-hidden transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1 border-border/50 bg-card">
-      <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-5 transition-opacity duration-300" />
+      <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-5 transition-opacity duration-300 pointer-events-none" />
       
       <CardHeader className="pb-3">
         <div className="flex items-start justify-between gap-3">
