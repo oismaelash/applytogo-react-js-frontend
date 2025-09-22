@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from "react";
 import { JobSiteCard } from "@/components/JobSiteCard";
 import { SearchFilter } from "@/components/SearchFilter";
-import { Newsletter } from "@/components/Newsletter";
+import { PullRequest } from "@/components/Pullrequest";
 import { fetchJobSites, JobSite } from "@/data/jobSites";
 
 const Index = () => {
@@ -118,7 +118,7 @@ const Index = () => {
 
         {/* Newsletter CTA */}
         <div data-section="newsletter">
-          <Newsletter />
+          <PullRequest />
         </div>
       </main>
 
