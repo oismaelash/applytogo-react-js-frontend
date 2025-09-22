@@ -46,9 +46,12 @@ const Index = () => {
       <header className="bg-background/80 backdrop-blur-sm border-b border-border/50">
         <div className="container mx-auto px-4 py-6">
           <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-3">
-              Encontre os melhores sites de vagas
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-2">
+              Plataformas de Vagas by Meu Guru Tech
             </h1>
+            <h2 className="text-2xl md:text-3xl font-semibold text-muted-foreground mb-3">
+              Encontre os melhores sites de vagas
+            </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Descubra uma curadoria dos melhores portais de emprego para encontrar sua próxima oportunidade profissional.
             </p>
