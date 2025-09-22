@@ -1,17 +1,35 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { JobSiteCard } from "@/components/JobSiteCard";
 import { SearchFilter } from "@/components/SearchFilter";
 import { Newsletter } from "@/components/Newsletter";
-import { jobSites } from "@/data/jobSites";
+import { fetchJobSites, JobSite } from "@/data/jobSites";
 
 const Index = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [jobSites, setJobSites] = useState<JobSite[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch job sites data on component mount
+  useEffect(() => {
+    const loadJobSites = async () => {
+      try {
+        const data = await fetchJobSites();
+        setJobSites(data);
+      } catch (error) {
+        console.error('Failed to load job sites:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadJobSites();
+  }, []);
 
   const categories = useMemo(() => {
     const uniqueCategories = [...new Set(jobSites.map(site => site.category))];
     return uniqueCategories.sort();
-  }, []);
+  }, [jobSites]);
 
   const filteredSites = useMemo(() => {
     return jobSites.filter(site => {
@@ -20,7 +38,7 @@ const Index = () => {
       const matchesCategory = selectedCategory === "all" || site.category === selectedCategory;
       return matchesSearch && matchesCategory;
     });
-  }, [searchTerm, selectedCategory]);
+  }, [searchTerm, selectedCategory, jobSites]);
 
   return (
     <div className="min-h-screen bg-gradient-background">
@@ -49,36 +67,47 @@ const Index = () => {
           categories={categories}
         />
 
-        {/* Results Counter */}
-        <div className="text-center mb-8">
-          <p className="text-muted-foreground">
-            {filteredSites.length} {filteredSites.length === 1 ? 'site encontrado' : 'sites encontrados'}
-            {selectedCategory !== "all" && ` na categoria "${selectedCategory}"`}
-          </p>
-        </div>
-
-        {/* Job Sites Grid */}
-        {filteredSites.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
-            {filteredSites.map((site, index) => (
-              <div 
-                key={site.id} 
-                className="animate-fade-in"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <JobSiteCard jobSite={site} />
-              </div>
-            ))}
-          </div>
-        ) : (
+        {/* Loading State */}
+        {loading ? (
           <div className="text-center py-20">
             <p className="text-xl text-muted-foreground mb-4">
-              Nenhum site encontrado para sua busca.
-            </p>
-            <p className="text-muted-foreground">
-              Tente ajustar os filtros ou termo de busca.
+              Carregando sites de vagas...
             </p>
           </div>
+        ) : (
+          <>
+            {/* Results Counter */}
+            <div className="text-center mb-8">
+              <p className="text-muted-foreground">
+                {filteredSites.length} {filteredSites.length === 1 ? 'site encontrado' : 'sites encontrados'}
+                {selectedCategory !== "all" && ` na categoria "${selectedCategory}"`}
+              </p>
+            </div>
+
+            {/* Job Sites Grid */}
+            {filteredSites.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+                {filteredSites.map((site, index) => (
+                  <div 
+                    key={site.id} 
+                    className="animate-fade-in"
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
+                    <JobSiteCard jobSite={site} />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-20">
+                <p className="text-xl text-muted-foreground mb-4">
+                  Nenhum site encontrado para sua busca.
+                </p>
+                <p className="text-muted-foreground">
+                  Tente ajustar os filtros ou termo de busca.
+                </p>
+              </div>
+            )}
+          </>
         )}
 
         {/* Newsletter CTA */}
