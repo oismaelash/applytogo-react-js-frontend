@@ -56,20 +56,19 @@ export const JobSiteCard = ({ jobSite }: JobSiteCardProps) => {
           {jobSite.description}
         </CardDescription>
         
-        <Button 
-          asChild 
-          className="w-full bg-gradient-primary hover:opacity-90 text-primary-foreground font-medium"
+        <a 
+          href={jobSite.url} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="w-full"
         >
-          <a 
-            href={jobSite.url} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2"
+          <Button 
+            className="w-full bg-gradient-primary hover:opacity-90 text-primary-foreground font-medium flex items-center justify-center gap-2"
           >
             Acessar site
             <ExternalLink className="h-4 w-4" />
-          </a>
-        </Button>
+          </Button>
+        </a>
       </CardContent>
     </Card>
   );
