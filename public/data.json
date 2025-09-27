@@ -439,6 +439,14 @@
       "description": "Magazine Luiza technology division",
       "url": "https://carreiras.magazineluiza.com.br/encontre-sua-vaga/",
       "requiresLogin": true
+    },
+      {
+      "id": "56",
+      "name": "GeekHunter",
+      "category": "plataformas brasileiras",
+      "description": "A plataforma de recrutamento para todas as suas vagas",
+      "url": "https://www.geekhunter.com.br/",
+      "requiresLogin": false
     }
   ]
 }
